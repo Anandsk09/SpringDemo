@@ -1,26 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
-<beans>
-<bean id="triangle" class="org.spring.ioc.poc.Triangle" ><!-- destroy-method="myDestroy" --> 
-<!-- <property name="type" value="RightAngle"></property> -->
-<!-- <constructor-arg value="20" index="0"/>
-<constructor-arg value="20" index="1"/> -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd"
+	xmlns:context="http://www.springframework.org/schema/context">
+
+
+	<context:annotation-config/>
+<!-- <bean id="triangle" class="org.spring.ioc.poc.Triangle" >destroy-method="myDestroy" 
+<property name="type" value="RightAngle"></property>
+<constructor-arg value="20" index="0"/>
+<constructor-arg value="20" index="1"/>
 <property name="pointa" ref="point1"></property>
 <property name="pointb" ref="point2"></property>
 <property name="pointc" ref="point3"></property>
 </bean>
  <bean id="triangle2" class="org.spring.ioc.poc.Triangle" parent="triangle">
  <property name="pointb" ref="point2"></property>
-</bean>
+</bean> -->
 <bean id="Circle" class="org.spring.ioc.poc.Circle" >
-<property name="center" ref="point2"/>
+
 </bean>
 
 <bean id="point1" class="org.spring.ioc.poc.Point">
+<qualifier value="circleRelatedBean"></qualifier>
 <property name="x" value="${point1.pointx}"></property>
 <property name="y" value="${point1.pointy}"></property>
 </bean>
-<bean id="point2" class="org.spring.ioc.poc.Point">
+ <bean id="point2" class="org.spring.ioc.poc.Point">
+ 
 <property name="x" value="5"></property>
 <property name="y" value="6"></property>
 </bean>
@@ -28,7 +37,12 @@
 <property name="x" value="7"></property>
 <property name="y" value="8"></property>
 </bean>
-<alias name="triangle" alias="abc"/>
+<bean id="centerx" class="org.spring.ioc.poc.Point">
+
+<property name="x" value="7"></property>
+<property name="y" value="8"></property>
+</bean>
+<!--<alias name="triangle" alias="abc"/> -->
 <alias name="Circle" alias="circle"/>
 <!--
 Bean Post Processor Code 
@@ -38,4 +52,9 @@ Bean Post Processor Code
   <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
   <property name="location" value="points.properties"></property>
   </bean>
+  
+ <!--  Required Annotation PostProcessor
+  <bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor"/>
+   -->
+  <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
 </beans>

@@ -14,9 +14,9 @@ public class DrawingApplication {
 		//BeanFactory factory=new XmlBeanFactory(new FileSystemResource("spring.xml"));
 		AbstractApplicationContext applicationContext=new ClassPathXmlApplicationContext("spring.xml");
 		//applicationContext.registerShutdownHook();
-		Shape shape=(Triangle) applicationContext.getBean("abc");
+		//Shape shape=(Triangle) applicationContext.getBean("abc");
 		Shape shape2=(Circle) applicationContext.getBean("circle");
-		shape.draw();
+		//shape.draw();
 		shape2.draw();
 		// Getting Beans of Point Class
 		/*
