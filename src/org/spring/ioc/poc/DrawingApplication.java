@@ -12,12 +12,22 @@ public class DrawingApplication {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		//BeanFactory factory=new XmlBeanFactory(new FileSystemResource("spring.xml"));
-		AbstractApplicationContext applicationContext=new ClassPathXmlApplicationContext("spring.xml");
+		ApplicationContext applicationContext=new ClassPathXmlApplicationContext("spring.xml");
 		//applicationContext.registerShutdownHook();
-		//Shape shape=(Triangle) applicationContext.getBean("abc");
-		Shape shape2=(Circle) applicationContext.getBean("circle");
+		//Shape shape=(Triangle) applicationContext.getBean("triangle");
 		//shape.draw();
-		shape2.draw();
+		//Shape shape2=(Circle) applicationContext.getBean("circle");
+		//shape2.draw();
+		
+		//Reading Meesage from Message File using object of Application Context
+		String msg=applicationContext.getMessage("greetings",new Object[] {"Anand"},"Default Greet",null);
+		System.out.println(msg);
+		
+		//Shape shape3=(Square) applicationContext.getBean("square");
+		//shape3.draw();
+		
+		Shape shape4=(Rectangle) applicationContext.getBean("rectangle");
+	    shape4.draw();
 		// Getting Beans of Point Class
 		/*
 		 * Point point=(Point) applicationContext.getBean("point1"); Point
