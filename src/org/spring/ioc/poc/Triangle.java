@@ -4,20 +4,26 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.MessageSource;
 
 public class Triangle implements Shape, ApplicationContextAware, BeanNameAware/* ,InitializingBean,DisposableBean */{
 	
 	Point pointa;
 	Point pointb;
 	Point pointc;
-	ApplicationContext ctx=null;
+	private ApplicationContext ctx;
+	//To Declare the MessageSource Interface Reference inside the class
+	@Autowired
+	private MessageSource messageSource;
 	
 	
 @Override
 	public String toString() {
-		return "Triangle [pointa=" + pointa + ", pointb=" + pointb + ", pointc=" + pointc + "]";
+	
+		return "";
 	}
 
 
@@ -67,7 +73,11 @@ public Triangle() {
 
 public void draw()
 {
-	System.out.println( toString());
+	//System.out.println(" Triangle [pointa=" + pointa + ", pointb=" + pointb + ", pointc=" + pointc + "]");
+	System.out.println(this.messageSource.getMessage("triangle.greetings",null,"Default Greet2",null));
+	System.out.println(this.messageSource.getMessage("triangle.paint",new Object[] {(pointa),(pointb),(pointc)},"Default Paint",null));
+		  
+		
 }
 
 
@@ -76,6 +86,11 @@ public void draw()
 public void setApplicationContext(ApplicationContext ctx) throws BeansException {
 	// TODO Auto-generated method stub
 	ctx=this.ctx;
+		
+		 // String msg2=ctx.getMessage("greetings2",null,"Default Greet2",null);
+		  
+		 //System.out.println(msg2);
+		 
 	
 }
 
@@ -86,6 +101,30 @@ public void setBeanName(String beanName) {
 	System.out.println("bean name is:"+beanName);
 	// TODO Auto-generated method stub
 	
+}
+
+
+
+public ApplicationContext getCtx() {
+	return ctx;
+}
+
+
+
+public void setCtx(ApplicationContext ctx) {
+	this.ctx = ctx;
+}
+
+
+
+public MessageSource getMessageSource() {
+	return messageSource;
+}
+
+
+
+public void setMessageSource(MessageSource messageSource) {
+	this.messageSource = messageSource;
 }
 
 	/*
